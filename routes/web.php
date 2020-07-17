@@ -22,4 +22,6 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 //---------------------------------------------------- 
 // Admin middleware 
+Route::resource('users', 'UserController'); // all crud methods available
+
 

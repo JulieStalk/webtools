@@ -1,6 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Models\User;
+use Illuminate\Support\Facades\Hash; //for password hashing
+use Illuminate\Support\Facades\DB;
 
 use Illuminate\Http\Request;
 
@@ -23,7 +26,8 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        //return the create.blade.php template resources/views 
+        return view('users.create');
     }
 
     /**
@@ -34,7 +38,19 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //creates a new user
+        $request->validate([
+            'name'=>'required|max:255',
+            'email'=>'required|unique:users|max:255',
+            'password'=>'required'
+        ]);
+        $user = new User([
+            'name' => $request->get('name'),
+            'email' => $request->get('email'),
+            'password' => Hash::make($request->get('password')),  // we need to hash the password using Laravel's built in hash
+        ]);
+        $user->save();
+        return redirect('/users')->with('success', 'User saved!');
     }
 
     /**
