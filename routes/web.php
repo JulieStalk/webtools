@@ -23,19 +23,21 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 //---------------------------------------------------- 
 // Admin middleware 
-Route::resource('users', 'UserController'); // all crud methods available
+Route::group([ 'middleware' => 'admin'], function()
+{
+    Route::resource('users', 'UserController'); // all crud methods available
 
-Route::any('/search',function(Request $request){
-    $q = $request->get( 'q' );
-    if($q){
-        $users = User::where('name','LIKE','%'.$q.'%')->orWhere('email','LIKE','%'.$q.'%')->paginate(15);
-    }else
-    {   //return all users
-        $users = DB::table('users')->paginate(15);
-    }
-    if(count($users) > 0)
-    return view('users.index', compact('users'));
-    else return view ('users.index')->withMessage('No Details found. Try to search again !');
+    Route::any('/search',function(Request $request){
+        $q = $request->get( 'q' );
+        if($q){
+            $users = User::where('name','LIKE','%'.$q.'%')->orWhere('email','LIKE','%'.$q.'%')->paginate(15);
+        }else
+        {   //return all users
+            $users = DB::table('users')->paginate(15);
+        }
+        if(count($users) > 0)
+        return view('users.index', compact('users'));
+        else return view ('users.index')->withMessage('No Details found. Try to search again !');
+    });
 });
-
 
