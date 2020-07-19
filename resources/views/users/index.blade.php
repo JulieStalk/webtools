@@ -12,6 +12,11 @@
                                 {{ session()->get('success') }}  
                             </div>
                         @endif
+                        @if(session()->get('error'))
+                            <div class="alert alert-danger">
+                                {{ session()->get('error') }}  
+                            </div>
+                        @endif                        
                     </div>
 
                     <form action="/search" method="POST" role="search">

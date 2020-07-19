@@ -16,10 +16,14 @@ class UserController extends Controller
      */
     public function index()
     {
+
+        // get current logged in user
+        $loggedInUser = Auth::user();
+
         //get all users
         $users = DB::table('users')->paginate(15);
 
-        return view('users.index', compact('users'));
+        return view('users.index', compact('users','loggedInUser'));
     }
 
     /**
@@ -89,13 +93,23 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
+        // get current logged in user
+        $loggedInUser = Auth::user();
+
+        // load user to be updated
+        $user = User::find($id);
+
+        // use policy to determine if the user can be updated
+        if (!$loggedInUser->can('update', $user)) {
+            return  redirect('/users')->with('error', 'You can not update another admin user!');
+        } 
+
         $request->validate([
             'name'=>'required|max:255',
             'email'=> 'required|unique:users,email,'.$id
             //'password'=>'required'
         ]);
 
-        $user = User::find($id);
         $user->name =  $request->get('name');
         $user->email = $request->get('email');
         if ($request->get('password') != "" || !empty($request->get('password')) )
@@ -115,10 +129,21 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //delete user
-        $user = User::find($id);
-        $user->delete();
 
-        return redirect('/users')->with('success', 'User deleted!');
+        // get current logged in user
+        $loggedInUser = Auth::user();
+
+        // load user to be deleted
+        $user = User::find($id);
+
+        // use policy to determine if the user can be deleted
+        if ($loggedInUser->can('delete', $user)) {
+            //delete user
+            $user->delete();
+            return redirect('/users')->with('success', 'User deleted!');
+        } else 
+        {
+            return  redirect('/users')->with('error', 'You can not delete an admin user!');        
+        }
     }
 }

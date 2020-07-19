@@ -39,9 +39,7 @@
                             <tr>
                             <td>ID</td>
                             <td>Name</td>
-                            <td>Website</td>
                             <td>Phone</td>
-                            <td>Address</td>
                             <td>Country</td>
                             </tr>
                         </thead>
@@ -51,9 +49,7 @@
                                 <tr>
                                     <td>{{$organisation->id}}</td>
                                     <td>{{$organisation->name}}</td>
-                                    <td>{{$organisation->website}}</td>
                                     <td>{{$organisation->phone}}</td>
-                                    <td>{{$organisation->address}}</td>
                                     <td>{{$organisation->country}}</td>                                    
                                     <td>
                                         <a href="{{ route('organisations.edit',$organisation->id)}}" class="btn btn-primary">Edit</a>
