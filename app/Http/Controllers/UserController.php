@@ -16,7 +16,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
+        //get all users
         $users = DB::table('users')->paginate(15);
 
         return view('users.index', compact('users'));
@@ -28,8 +28,8 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {
-        //return the create.blade.php template resources/views 
+    {   //open new users view
+        //return the create.blade.php template resources/views/users
         return view('users.create');
     }
 
@@ -89,9 +89,6 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $ignore_id = null;
-        $has_pass = false;
-		
         $request->validate([
             'name'=>'required|max:255',
             'email'=> 'required|unique:users,email,'.$id

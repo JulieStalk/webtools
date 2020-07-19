@@ -32,7 +32,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="role">Role</label>
-                                <select class="form-control" id="role">
+                                <select class="form-control" id="role" name="role">   
                                     <option value="employee" @if( $user->role == "employee" ){ selected = 'selected' } @endif >Employee</option>
                                     <option value="admin" @if( $user->role == "admin" ){ selected = 'selected' } @endif >Admin</option>
                                 </select>
