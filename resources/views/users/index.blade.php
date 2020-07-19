@@ -57,13 +57,21 @@
                                     <td>{{$user->email}}</td>
                                     <td>{{$user->role}}</td>
                                     <td>
-                                        <a href="{{ route('users.edit',$user->id)}}" class="btn btn-primary">Edit</a>
+                                        @if (Auth::user()->can('update',  App\Models\User::find($user->id)))
+                                            <a href="{{ route('users.edit',$user->id)}}" class="btn btn-primary">Edit</a>
+                                        @else
+                                            <a href="{{ route('users.edit',$user->id)}}" class="btn btn-primary disabled">Edit</a>
+                                        @endif
                                     </td>
                                     <td>
                                         <form action="{{ route('users.destroy', $user->id)}}" method="post">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button class="btn btn-danger" type="submit">Delete</button>
+                                        @csrf                                        
+                                        @if (Auth::user()->can('delete',  App\Models\User::find($user->id)))
+                                            @method('DELETE')
+                                            <button class="btn btn-danger" type="submit">Delete</button>
+                                        @else
+                                            <button class="btn btn-danger" disabled type="submit">Delete</button>
+                                        @endif
                                         </form>
                                     </td>
                                 </tr>
