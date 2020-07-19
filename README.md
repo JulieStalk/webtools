@@ -1,11 +1,13 @@
 # Webtools Full Stack Coding Test
-Hi,
+Hi Jonathan,
 
-I have completed all the tasks including the Bonus point.  
+I have completed all the tasks including the Bonus points.  
 I created UserPolicy to prevent ADMIN users from updating and deleting ...via the routes & I disabled the buttons also.
 I also turn on User and Organisation menus if you are an ADMIN user and prevent an employee from going to ADMIN only routes.
 
-I didn't integrate react as I don't really know it, but if you would like I will spend a few hours integrating it.
+I didn't integrate react as I ran out of time as it was my daughter's birthday & school holidays, but if you would like I will spend a few hours learning & integrating it.
+
+I used CSRF@ to prevent cross site request forgery and to prevent XSS I used double brace syntax in the blade templates: {{}}
 
 Cheers
 Julie
