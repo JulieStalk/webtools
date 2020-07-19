@@ -36,7 +36,7 @@
                            <h2> {{ __('Users') }} </h2>
                         </div>
                         <div>
-                            <a href="{{ route('users.create')}}" class="btn btn-primary">New user</a>
+                            <a href="{{ route('users.create')}}" class="btn btn-primary">Add New user</a>
                         </div>  
                     </div>
                     <table class="table table-striped">

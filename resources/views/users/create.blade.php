@@ -19,15 +19,15 @@
                             @csrf
                             <div class="form-group">    
                                 <label for="name">User Full Name:</label>
-                                <input type="text" class="form-control" name="name"/>
+                                <input type="text" class="form-control" name="name" placeholder="Enter your full name" />
                             </div>
                             <div class="form-group">
                                 <label for="email">Email:</label>
-                                <input type="email" class="form-control" name="email"/>
+                                <input type="email" class="form-control" name="email"  placeholder="Enter email"/>
                             </div>
                             <div class="form-group">
                                 <label for="password">Password:</label>
-                                <input type="password" class="form-control" name="password"/>
+                                <input type="password" class="form-control" name="password"  placeholder="Enter Password" />
                             </div>
                             <div class="form-group">
                                 <label for="role">Role</label>

@@ -28,7 +28,7 @@ Route::group([ 'middleware' => 'admin'], function()
 {
     Route::resource('users', 'UserController'); // all crud methods available
     Route::resource('organisations', 'OrganisationController'); // all crud methods available
-
+    //user search by name or email
     Route::any('/search',function(Request $request){
         $q = $request->get( 'q' );
         if($q){
@@ -42,6 +42,7 @@ Route::group([ 'middleware' => 'admin'], function()
         else return view ('users.index')->withMessage('No Details found. Try to search again !');
     });
     
+    //organisation search by name
     Route::any('/search-org',function(Request $request){
         $q = $request->get( 'q' );
         if($q){

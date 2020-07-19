@@ -1,4 +1,16 @@
 # Webtools Full Stack Coding Test
+Hi,
+
+I have completed all the tasks including the Bonus point.  
+I created UserPolicy to prevent ADMIN users from updating and deleting ...via the routes & I disabled the buttons also.
+I also turn on User and Organisation menus if you are an ADMIN user and prevent an employee from going to ADMIN only routes.
+
+I didn't integrate react as I don't really know it, but if you would like I will spend a few hours integrating it.
+
+Cheers
+Julie
+stalker.julie@gmail.com  027 405 7119
+
 
 - We'd expect candidates to complete this coding test within 2-4 hours.
 - Please duplicate the project to a private GitHub repository, and invite the reviewer to the repository when you've completed the assessment. We want to see good commit hygiene.

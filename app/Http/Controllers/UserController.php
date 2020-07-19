@@ -49,15 +49,20 @@ class UserController extends Controller
         $request->validate([
             'name'=>'required|max:255',
             'email'=>'required|unique:users|max:255',
-            'password'=>'required'
+            'password'=>'required',
+            'role'=>'required',
         ]);
+        
+        $userName = $request->get('name'); //save username for message
+
         $user = new User([
             'name' => $request->get('name'),
             'email' => $request->get('email'),
             'password' => Hash::make($request->get('password')),  // we need to hash the password using Laravel's built in hash
+            'role' => $request->get('role'),
         ]);
         $user->save();
-        return redirect('/users')->with('success', 'User saved!');
+        return redirect('/users')->with('success', "User $userName saved!");
     }
 
     /**
@@ -106,19 +111,24 @@ class UserController extends Controller
 
         $request->validate([
             'name'=>'required|max:255',
-            'email'=> 'required|unique:users,email,'.$id
-            //'password'=>'required'
+            'email'=> 'required|unique:users,email,'.$id, // doesnt check the current user's email so they can update 
+            //'password'=>'required'  if empty then we dont update
+            'role'=> 'required',
         ]);
-
+        
+        $userName = $request->get('name'); //save username for message
         $user->name =  $request->get('name');
         $user->email = $request->get('email');
+        $user->role = $request->get('role');
+
+        //if they leave password empty then don't update it
         if ($request->get('password') != "" || !empty($request->get('password')) )
-        {
+        {  //if they entered something in password then update it
             $user->password = Hash::make($request->get('password')); // we need to hash the password using Laravel's built in hash
         }        
         $user->save();
 
-        return redirect('/users')->with('success', 'user updated!');
+        return redirect('/users')->with('success', "user $userName updated!");
     }
 
     /**
